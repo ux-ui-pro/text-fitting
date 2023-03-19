@@ -14,8 +14,9 @@ export class TextFitting extends HTMLElement {
 
         this.client = shadowOpen.querySelector('.client')
         this.scroll = shadowOpen.querySelector('.scroll')
-        this.scroll.style.cssText = `display: inline-block; white-space: nowrap;`
         this.update = this.update.bind(this)
+
+        this.scroll.style.cssText = `display: inline-block; white-space: nowrap;`
 
         addEventListener('resize', this.update)
 
