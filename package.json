@@ -1,6 +1,6 @@
 {
   "name": "text-fitting",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Vanilla js text component that sets its font-size to fill a target width",
   "author": "ux-ui.pro",
   "license": "MIT",
