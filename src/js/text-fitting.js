@@ -4,13 +4,7 @@ export class TextFitting extends HTMLElement {
 
         const shadowOpen = this.attachShadow({mode: 'open'})
 
-        shadowOpen.innerHTML = `
-            <div class="client">
-                <div class="scroll">
-                    <slot></slot>
-                </div>
-            </div>
-        `
+        shadowOpen.innerHTML = `<div class="client"><div class="scroll"><slot></slot></div></div>`
 
         this.client = shadowOpen.querySelector('.client')
         this.scroll = shadowOpen.querySelector('.scroll')
