@@ -2,44 +2,40 @@ export class TextFitting extends HTMLElement {
     constructor() {
         super()
 
-        const shadowOpen = this.attachShadow({mode: 'open'})
+        const shadowOpen = this.attachShadow({ mode: 'open' })
 
-        shadowOpen.innerHTML = `<div class="client"><div class="scroll"><slot></slot></div></div>`
+        shadowOpen.innerHTML = `<div class="outer"><div class="inner"><slot></slot></div></div>`
 
-        this.client = shadowOpen.querySelector('.client')
-        this.scroll = shadowOpen.querySelector('.scroll')
+        this.outer = shadowOpen.querySelector('.outer')
+        this.inner = shadowOpen.querySelector('.inner')
         this.update = this.update.bind(this)
 
-        this.scroll.style.cssText = `display: inline-block; white-space: nowrap;`
+        this.inner.style.cssText = 'display: inline-block; white-space: nowrap;'
 
         addEventListener('resize', this.update)
 
-        if (document.fonts) {
-            document.fonts.addEventListener('loadingdone', this.update)
-        }
+        document.fonts.addEventListener('loadingdone', this.update)
+    }
+
+    connectedCallback() {
+        this.update()
     }
 
     disconnectedCallback() {
         removeEventListener('resize', this.update)
 
-        if (document.fonts) {
-            document.fonts.removeEventListener('loadingdone', this.update)
-        }
+        document.fonts.removeEventListener('loadingdone', this.update)
     }
 
     update() {
         cancelAnimationFrame(this.af)
 
         this.af = requestAnimationFrame(() => {
-            let fontSize = parseInt(getComputedStyle(this.scroll).fontSize, 10),
-                width = ((this.client.clientWidth / this.scroll.scrollWidth) * fontSize).toFixed(0) + 'px'
+            let fontSize = parseInt(getComputedStyle(this.inner).fontSize, 10),
+                width = ((this.outer.clientWidth / this.inner.scrollWidth) * fontSize).toFixed(0) + 'px'
 
-            this.scroll.style.fontSize = `${width}`
+            this.inner.style.fontSize = `${width}`
         })
-    }
-
-    connectedCallback() {
-        this.update()
     }
 }
 
