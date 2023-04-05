@@ -9,6 +9,7 @@
 [![GitHub package version](https://img.shields.io/github/package-json/v/ux-ui-pro/text-fitting.svg)](https://github.com/ux-ui-pro/text-fitting)
 [![NPM Downloads](https://img.shields.io/npm/dm/text-fitting.svg?style=flat)](https://www.npmjs.org/package/text-fitting)
 
+<p><sup><a href="https://bundlephobia.com/package/text-fitting">0.5KB gzipped</a></sup></p>
 <h3><a href="https://ux-ui-pro.github.io/text-fitting/dist/">Demo</a></h3>
 
 </div>
