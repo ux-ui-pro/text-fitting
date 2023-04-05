@@ -22,21 +22,10 @@ const TextFitting = () => {
             })
         },
 
-        debounce = (fn, delay) => {
-            let timer
-
-            return (...args) => {
-                if (timer) clearTimeout(timer)
-                timer = setTimeout(() => fn(...args), delay)
-            }
-        },
-
         init = () => {
             template()
 
-            addEventListener('resize', debounce(() => {
-                update()
-            }, 100))
+            addEventListener('resize', () => update())
 
             if (document.fonts) {
                 document.fonts.addEventListener('loadingdone', update)
