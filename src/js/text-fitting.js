@@ -1,41 +1,42 @@
-const TextFitting = () => {
-    const fittings = document.querySelectorAll('.text-fitting')
+export class TextFitting extends HTMLElement {
+    constructor() {
+        super()
 
-    for (const fitting of fittings) {
-        const
+        const shadowOpen = this.attachShadow({ mode: 'open' })
 
-        template = () => {
-            fitting.innerHTML = '<div class="outer"><div class="inner">' + fitting.innerHTML + '</div></div>'
-            fitting.outer = fitting.querySelector('.outer')
-            fitting.inner = fitting.querySelector('.inner')
-            fitting.inner.style.cssText = 'display: inline-block; white-space: nowrap;'
-        },
+        shadowOpen.innerHTML = `<div class="wrap"><div class="body"><slot></slot></div></div>`
 
-        update = () => {
-            cancelAnimationFrame(fitting.af)
+        this.wrap = shadowOpen.querySelector('.wrap')
+        this.body = shadowOpen.querySelector('.body')
+        this.update = this.update.bind(this)
 
-            fitting.af = requestAnimationFrame(() => {
-                let width = parseInt(getComputedStyle(fitting.inner).fontSize, 10),
-                    fontSize = Math.ceil((fitting.outer.clientWidth / fitting.inner.scrollWidth) * width)
+        this.body.style.cssText = 'display: inline-block; white-space: nowrap;'
 
-                fitting.inner.style.fontSize = `${fontSize}px`
-            })
-        },
+        addEventListener('resize', this.update)
 
-        init = () => {
-            template()
+        document.fonts.addEventListener('loadingdone', this.update)
+    }
 
-            addEventListener('resize', () => update())
+    connectedCallback() {
+        this.update()
+    }
 
-            if (document.fonts) {
-                document.fonts.addEventListener('loadingdone', update)
-            }
-        }
+    disconnectedCallback() {
+        removeEventListener('resize', this.update)
 
-        init()
+        document.fonts.removeEventListener('loadingdone', this.update)
+    }
+
+    update() {
+        cancelAnimationFrame(this.af)
+
+        this.af = requestAnimationFrame(() => {
+            let fontSize = parseInt(getComputedStyle(this.body).fontSize, 10),
+                width = Math.ceil((this.wrap.clientWidth / this.body.scrollWidth) * fontSize) + 'px'
+
+            this.body.style.fontSize = `${width}`
+        })
     }
 }
 
-export {
-    TextFitting
-}
+customElements.get('text-fitting') || customElements.define('text-fitting', TextFitting)

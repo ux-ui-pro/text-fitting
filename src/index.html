@@ -8,7 +8,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;400;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 	<style type="text/css">
         html {
@@ -21,7 +21,7 @@
             font-feature-settings: "kern" 1,"liga" 0;
             font-size: 1.6rem;
             font-weight: 400;
-            line-height: 1.5;
+            line-height: 1.3;
         }
 
         html,
@@ -35,26 +35,36 @@
         .layout {
             max-width: 120rem;
             margin: 0 auto;
-            padding: 5rem 2rem;
+            padding: 3rem 2rem 6rem;
             border: 2px solid red;
 	        border-top: none;
 	        border-bottom: none;
         }
 
         strong {
-	        text-transform: uppercase;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        small {
+            font-weight: 200;
+            text-transform: uppercase;
         }
 	</style>
 </head>
 <body>
 <div class="layout">
-	<div class="text-fitting">
-		text-fitting
-	</div>
-
-	<div class="text-fitting">
-		Twinkle, twinkle, little star
-	</div>
+	<text-fitting>text-fitting</text-fitting>
+	<text-fitting>
+		<small>
+			Twinkle, twinkle, little star
+		</small>
+	</text-fitting>
+	<text-fitting>
+		<strong>
+			Twinkle, twinkle, little star
+		</strong>
+	</text-fitting>
 </div>
 <script src="js/text-fitting.min.js"></script>
 </body>
