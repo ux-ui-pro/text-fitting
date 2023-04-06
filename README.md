@@ -31,5 +31,11 @@ import { TextFitting } from 'text-fitting'
 ```
 <br>
 
+### Usage
+```HTML
+<text-fitting>someone</text-fitting>
+```
+<br>
+
 ### License
 text-fitting is released under MIT license
