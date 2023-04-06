@@ -1,3 +1,3 @@
-import { TextFitting } from './text-fitting.js'
+import TextFitting from './text-fitting.js'
 
 new TextFitting()

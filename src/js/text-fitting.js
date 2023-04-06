@@ -1,4 +1,4 @@
-export class TextFitting extends HTMLElement {
+export default class TextFitting extends HTMLElement {
     constructor() {
         super()
 
