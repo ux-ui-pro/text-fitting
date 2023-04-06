@@ -27,7 +27,7 @@ $ npm i text-fitting
 
 ### Import
 ```javascript
-import { TextFitting } from 'text-fitting'
+import TextFitting from 'text-fitting'
 ```
 <br>
 
