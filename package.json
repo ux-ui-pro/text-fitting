@@ -1,6 +1,6 @@
 {
   "name": "text-fitting",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "Sets the font size to fill the target width",
   "author": "ux-ui.pro",
   "license": "MIT",
