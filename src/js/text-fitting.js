@@ -12,7 +12,8 @@ export default class TextFitting extends HTMLElement {
 
         this.body.style.cssText = 'display: inline-block; white-space: nowrap;'
 
-        addEventListener('resize', this.update)
+        this.resizeObserver = new ResizeObserver(this.update)
+        this.resizeObserver.observe(this.wrap)
 
         document.fonts.addEventListener('loadingdone', this.update)
     }
@@ -22,7 +23,7 @@ export default class TextFitting extends HTMLElement {
     }
 
     disconnectedCallback() {
-        removeEventListener('resize', this.update)
+        this.resizeObserver.unobserve(this.wrap)
 
         document.fonts.removeEventListener('loadingdone', this.update)
     }
