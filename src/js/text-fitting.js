@@ -16,16 +16,6 @@ export default class TextFitting extends HTMLElement {
         document.fonts.addEventListener('loadingdone', this.update)
     }
 
-    connectedCallback() {
-        this.update()
-    }
-
-    disconnectedCallback() {
-        this.resizeObserver.unobserve(this.wrap)
-
-        document.fonts.removeEventListener('loadingdone', this.update)
-    }
-
     update() {
         cancelAnimationFrame(this.af)
 
@@ -35,6 +25,16 @@ export default class TextFitting extends HTMLElement {
 
             this.body.style.fontSize = `${width}`
         })
+    }
+
+    connectedCallback() {
+        this.update()
+    }
+
+    disconnectedCallback() {
+        this.resizeObserver.unobserve(this.wrap)
+
+        document.fonts.removeEventListener('loadingdone', this.update)
     }
 }
 
