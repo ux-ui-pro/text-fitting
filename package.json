@@ -1,6 +1,6 @@
 {
   "name": "text-fitting",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Sets the font size to fill the target width",
   "author": "ux-ui.pro",
   "license": "MIT",
@@ -35,11 +35,14 @@
     "webpack-stream": "^7.0.0"
   },
   "keywords": [
-    "text",
     "fit",
+    "text",
     "size",
-    "width",
     "font",
-    "responsive"
+    "width",
+    "fitting",
+    "responsive",
+    "text sizing",
+    "fitting text"
   ]
 }
