@@ -4,13 +4,11 @@ export default class TextFitting extends HTMLElement {
 
         const shadowOpen = this.attachShadow({ mode: 'open' })
 
-        shadowOpen.innerHTML = `<div class="wrap"><div class="body"><slot></slot></div></div>`
+        shadowOpen.innerHTML = `<div class="wrap"><div class="body" style="display: inline-block; white-space: nowrap;"><slot></slot></div></div>`
 
         this.wrap = shadowOpen.querySelector('.wrap')
         this.body = shadowOpen.querySelector('.body')
         this.update = this.update.bind(this)
-
-        this.body.style.cssText = 'display: inline-block; white-space: nowrap;'
 
         this.resizeObserver = new ResizeObserver(this.update)
         this.resizeObserver.observe(this.wrap)
