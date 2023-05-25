@@ -17,13 +17,15 @@ export default class TextFitting extends HTMLElement {
 	}
 
 	update() {
-		cancelAnimationFrame(this.af)
+		if (this.af) {
+			cancelAnimationFrame(this.af)
+		}
 
 		this.af = requestAnimationFrame(() => {
-			let fontSize = parseInt(getComputedStyle(this.body).fontSize, 10),
-				width = Math.ceil((this.wrap.clientWidth / this.body.scrollWidth) * fontSize) + 'px'
+			let fontSize = parseInt(getComputedStyle(this.body).fontSize, 10)
+			let width = Math.floor((this.wrap.clientWidth / this.body.scrollWidth) * fontSize) + 'px'
 
-			this.body.style.fontSize = `${width}`
+			this.body.style.fontSize = width
 		})
 	}
 
