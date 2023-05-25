@@ -26,11 +26,6 @@ class $cf838c15c8b009ba$export$2e2bcd8739ae039 extends HTMLElement {
         this.resizeObserver.unobserve(this.wrap);
         document.fonts.removeEventListener("loadingdone", this.update);
     }
-    destroy() {
-        cancelAnimationFrame(this.af);
-        this.resizeObserver.disconnect();
-        document.fonts.removeEventListener("loadingdone", this.update);
-    }
 }
 customElements.get("text-fitting") || customElements.define("text-fitting", $cf838c15c8b009ba$export$2e2bcd8739ae039);
 

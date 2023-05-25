@@ -36,12 +36,6 @@ export default class TextFitting extends HTMLElement {
 
 		document.fonts.removeEventListener('loadingdone', this.update)
 	}
-
-	destroy() {
-		cancelAnimationFrame(this.af)
-		this.resizeObserver.disconnect()
-		document.fonts.removeEventListener('loadingdone', this.update)
-	}
 }
 
 customElements.get('text-fitting') || customElements.define('text-fitting', TextFitting)
