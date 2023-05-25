@@ -8,15 +8,16 @@ class $cf838c15c8b009ba$export$2e2bcd8739ae039 extends HTMLElement {
         this.wrap = shadowOpen.querySelector(".wrap");
         this.body = shadowOpen.querySelector(".body");
         this.update = this.update.bind(this);
+        this.af = null;
         this.resizeObserver = new ResizeObserver(this.update);
         this.resizeObserver.observe(this.wrap);
         document.fonts.addEventListener("loadingdone", this.update);
     }
     update() {
-        cancelAnimationFrame(this.af);
+        if (this.af) cancelAnimationFrame(this.af);
         this.af = requestAnimationFrame(()=>{
-            let fontSize = parseInt(getComputedStyle(this.body).fontSize, 10), width = Math.ceil(this.wrap.clientWidth / this.body.scrollWidth * fontSize) + "px";
-            this.body.style.fontSize = `${width}`;
+            let bodyFontSize = parseInt(getComputedStyle(this.body).fontSize, 10), calcFontSize = Math.floor(this.wrap.clientWidth / this.body.scrollWidth * bodyFontSize);
+            this.body.style.fontSize = `${calcFontSize}px`;
         });
     }
     connectedCallback() {
