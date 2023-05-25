@@ -4,7 +4,7 @@ export default class TextFitting extends HTMLElement {
 
 		const shadowOpen = this.attachShadow({ mode: 'open' })
 
-		shadowOpen.innerHTML = `<div class="wrap"><div class="body" style="display: inline-block; white-space: nowrap;"><slot></slot></div></div>`
+		shadowOpen.innerHTML = `<div class="wrap" style="display: flex; justify-content: center;"><div class="body" style="white-space: nowrap;"><slot></slot></div></div>`
 
 		this.wrap = shadowOpen.querySelector('.wrap')
 		this.body = shadowOpen.querySelector('.body')
@@ -22,10 +22,8 @@ export default class TextFitting extends HTMLElement {
 		}
 
 		this.af = requestAnimationFrame(() => {
-			let fontSize = parseInt(getComputedStyle(this.body).fontSize, 10)
-			let width = Math.floor((this.wrap.clientWidth / this.body.scrollWidth) * fontSize) + 'px'
-
-			this.body.style.fontSize = width
+			let bodyFontSize = parseInt(getComputedStyle(this.body).fontSize, 10)
+			this.body.style.fontSize = Math.floor((this.wrap.clientWidth / this.body.scrollWidth) * bodyFontSize) + 'px'
 		})
 	}
 
