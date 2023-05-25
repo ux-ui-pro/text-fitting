@@ -14,7 +14,7 @@ class $4fa36e821943b400$export$2e2bcd8739ae039 extends HTMLElement {
         const shadowOpen = this.attachShadow({
             mode: "open"
         });
-        shadowOpen.innerHTML = `<div class="wrap"><div class="body" style="white-space: nowrap;"><slot></slot></div></div>`;
+        shadowOpen.innerHTML = `<div class="wrap" style="display: flex; justify-content: center;"><div class="body" style="white-space: nowrap;"><slot></slot></div></div>`;
         this.wrap = shadowOpen.querySelector(".wrap");
         this.body = shadowOpen.querySelector(".body");
         this.update = this.update.bind(this);
@@ -25,7 +25,7 @@ class $4fa36e821943b400$export$2e2bcd8739ae039 extends HTMLElement {
     update() {
         cancelAnimationFrame(this.af);
         this.af = requestAnimationFrame(()=>{
-            let fontSize = parseInt(getComputedStyle(this.body).fontSize, 10), width = Math.floor(this.wrap.clientWidth / this.body.scrollWidth * fontSize) + "px";
+            let fontSize = parseInt(getComputedStyle(this.body).fontSize, 10), width = Math.ceil(this.wrap.clientWidth / this.body.scrollWidth * fontSize) + "px";
             this.body.style.fontSize = `${width}`;
         });
     }
