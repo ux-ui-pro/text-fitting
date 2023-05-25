@@ -9,7 +9,7 @@
 [![GitHub package version](https://img.shields.io/github/package-json/v/ux-ui-pro/text-fitting.svg)](https://github.com/ux-ui-pro/text-fitting)
 [![NPM Downloads](https://img.shields.io/npm/dm/text-fitting.svg?style=flat)](https://www.npmjs.org/package/text-fitting)
 
-<p><sup><a href="https://bundlephobia.com/package/text-fitting">0.5KB gzipped</a></sup></p>
+<p><sup><a href="https://bundlephobia.com/package/text-fitting">700B gzipped</a></sup></p>
 <h3><a href="https://ux-ui-pro.github.io/text-fitting/dist/">Demo</a></h3>
 
 </div>
@@ -35,6 +35,12 @@ import TextFitting from 'text-fitting'
 ```HTML
 <text-fitting>someone</text-fitting>
 ```
+<br>
+
+### Options
+| Option | Description |
+| --- | --- |
+| `.destroy()` | The destroy method cancels animation, disables monitoring of element resizing, and unsubscribes from the loadingdone event. |
 <br>
 
 ### License
