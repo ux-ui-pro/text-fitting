@@ -14,53 +14,37 @@ class $4fa36e821943b400$export$2e2bcd8739ae039 extends HTMLElement {
         const shadowOpen = this.attachShadow({
             mode: "open"
         });
-        shadowOpen.innerHTML = `<div class="wrap"><div class="body"><slot></slot></div></div>`;
-        this.wrap = shadowOpen.querySelector(".wrap");
-        this.body = shadowOpen.querySelector(".body");
-        this.update = this.update.bind(this);
+        shadowOpen.innerHTML = `<div id="wrap"><div id="body"><slot></slot></div></div>`;
+        this.wrap = shadowOpen.querySelector("#wrap");
+        this.body = shadowOpen.querySelector("#body");
+        this.update = ()=>{
+            !this.isDestroyed && cancelAnimationFrame(this.af);
+            this.af = requestAnimationFrame(()=>{
+                const bodyFontSize = parseInt(getComputedStyle(this.body).fontSize, 10);
+                const calcFontSize = Math.floor(this.wrap.clientWidth / this.body.scrollWidth * bodyFontSize);
+                this.wrap.style.display = "flex";
+                this.wrap.style.justifyContent = "center";
+                this.body.style.whiteSpace = "nowrap";
+                this.body.style.fontSize = `${calcFontSize}px`;
+            });
+            this.resizeObserver.observe(this.wrap);
+        };
         this.af = null;
         this.resizeObserver = new ResizeObserver(this.update);
+        this.isDestroyed = true;
     }
     init() {
-        document.fonts.addEventListener("loadingdone", this.update);
-        this.resizeObserver.observe(this.wrap);
-    }
-    update() {
-        if (this.af) cancelAnimationFrame(this.af);
-        this.af = requestAnimationFrame(()=>{
-            const bodyFontSize = parseInt(getComputedStyle(this.body).fontSize, 10);
-            const calcFontSize = Math.floor(this.wrap.clientWidth / this.body.scrollWidth * bodyFontSize);
-            Object.assign(this.wrap.style, {
-                display: "flex",
-                justifyContent: "center"
-            });
-            Object.assign(this.body.style, {
-                whiteSpace: "nowrap",
-                fontSize: `${calcFontSize}px`
-            });
-        });
+        this.isDestroyed = false;
+        this.update();
     }
     destroy() {
+        this.isDestroyed = true;
         this.resizeObserver.unobserve(this.wrap);
-        document.fonts.removeEventListener("loadingdone", this.update);
         this.af = null;
-        if (this.parentElement) {
-            Object.assign(this.wrap.style, {
-                display: "",
-                justifyContent: ""
-            });
-            Object.assign(this.body.style, {
-                fontSize: "",
-                whiteSpace: ""
-            });
-        }
-    }
-    connectedCallback() {
-        this.update();
-        this.init();
-    }
-    disconnectedCallback() {
-        this.destroy();
+        this.wrap.style.display = "";
+        this.wrap.style.justifyContent = "";
+        this.body.style.whiteSpace = "";
+        this.body.style.fontSize = "";
     }
 }
 customElements.get("text-fitting") || customElements.define("text-fitting", $4fa36e821943b400$export$2e2bcd8739ae039);
