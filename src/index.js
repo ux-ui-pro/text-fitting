@@ -4,55 +4,49 @@ export default class TextFitting extends HTMLElement {
 
 		const shadowOpen = this.attachShadow({ mode: 'open' })
 
-		shadowOpen.innerHTML = `<div id="wrap"><div id="body"><slot></slot></div></div>`
+		shadowOpen.innerHTML = `
+			<style>
+				#wrap {
+					display: flex;
+					justify-content: center;
+				}
+				#body {
+					white-space: nowrap;
+				}
+			</style>
+			<div id="wrap">
+				<div id="body">
+					<slot></slot>
+				</div>
+			</div>
+		`
 
 		this.wrap = shadowOpen.querySelector('#wrap')
 		this.body = shadowOpen.querySelector('#body')
+		this.update = this.update.bind(this)
 
-		this.resize = () => {
-			!this.isUnmounted && cancelAnimationFrame(this.af)
-
-			this.af = requestAnimationFrame(() => {
-				const bodyFontSize = parseInt(getComputedStyle(this.body).fontSize, 10)
-				const calcFontSize = Math.floor((this.wrap.clientWidth / this.body.scrollWidth) * bodyFontSize)
-
-				this.wrap.style.display = 'flex'
-				this.wrap.style.justifyContent = 'center'
-				this.body.style.whiteSpace = 'nowrap'
-				this.body.style.fontSize = `${calcFontSize}px`
-			})
-
-			this.resizeObserver.observe(this.wrap)
-		}
-
-		this.af = null
-		this.resizeObserver = new ResizeObserver(this.resize)
-		this.isUnmounted = true
+		this.resizeObserver = new ResizeObserver(this.update)
+		this.resizeObserver.observe(this.wrap)
 	}
 
 	update() {
-		this.isUnmounted = false
-		this.resize()
+		cancelAnimationFrame(this.af)
+
+		this.af = requestAnimationFrame(() => {
+			const bodyFontSize = parseInt(getComputedStyle(this.body).fontSize, 10)
+			const calcFontSize = Math.floor((this.wrap.clientWidth / this.body.scrollWidth) * bodyFontSize)
+
+			this.body.style.fontSize = `${calcFontSize}px`
+		})
 	}
 
-	unmount() {
-		this.isUnmounted = true
+	connectedCallback() {
+		this.update()
+	}
+
+	disconnectedCallback() {
 		this.resizeObserver.unobserve(this.wrap)
 		this.af = null
-		this.wrap.style.display = ''
-		this.wrap.style.justifyContent = ''
-		this.body.style.whiteSpace = ''
-		this.body.style.fontSize = ''
-	}
-
-	static init() {
-		const textFittings = document.querySelectorAll('text-fitting')
-		textFittings.forEach(textFitting => textFitting.update())
-	}
-
-	static destroy() {
-		const textFittings = document.querySelectorAll('text-fitting')
-		textFittings.forEach(textFitting => textFitting.unmount())
 	}
 }
 
