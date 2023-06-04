@@ -7,8 +7,8 @@ class $cf838c15c8b009ba$export$2e2bcd8739ae039 extends HTMLElement {
         shadowOpen.innerHTML = `<div id="wrap"><div id="body"><slot></slot></div></div>`;
         this.wrap = shadowOpen.querySelector("#wrap");
         this.body = shadowOpen.querySelector("#body");
-        this.update = ()=>{
-            !this.isDestroyed && cancelAnimationFrame(this.af);
+        this.resize = ()=>{
+            !this.isUnmounted && cancelAnimationFrame(this.af);
             this.af = requestAnimationFrame(()=>{
                 const bodyFontSize = parseInt(getComputedStyle(this.body).fontSize, 10);
                 const calcFontSize = Math.floor(this.wrap.clientWidth / this.body.scrollWidth * bodyFontSize);
@@ -20,21 +20,29 @@ class $cf838c15c8b009ba$export$2e2bcd8739ae039 extends HTMLElement {
             this.resizeObserver.observe(this.wrap);
         };
         this.af = null;
-        this.resizeObserver = new ResizeObserver(this.update);
-        this.isDestroyed = true;
+        this.resizeObserver = new ResizeObserver(this.resize);
+        this.isUnmounted = true;
     }
-    init() {
-        this.isDestroyed = false;
-        this.update();
+    update() {
+        this.isUnmounted = false;
+        this.resize();
     }
-    destroy() {
-        this.isDestroyed = true;
+    unmount() {
+        this.isUnmounted = true;
         this.resizeObserver.unobserve(this.wrap);
         this.af = null;
         this.wrap.style.display = "";
         this.wrap.style.justifyContent = "";
         this.body.style.whiteSpace = "";
         this.body.style.fontSize = "";
+    }
+    static init() {
+        const textFittings = document.querySelectorAll("text-fitting");
+        textFittings.forEach((textFitting)=>textFitting.update());
+    }
+    static destroy() {
+        const textFittings = document.querySelectorAll("text-fitting");
+        textFittings.forEach((textFitting)=>textFitting.unmount());
     }
 }
 customElements.get("text-fitting") || customElements.define("text-fitting", $cf838c15c8b009ba$export$2e2bcd8739ae039);

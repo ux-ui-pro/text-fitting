@@ -9,8 +9,8 @@ export default class TextFitting extends HTMLElement {
 		this.wrap = shadowOpen.querySelector('#wrap')
 		this.body = shadowOpen.querySelector('#body')
 
-		this.update = () => {
-			!this.isDestroyed && cancelAnimationFrame(this.af)
+		this.resize = () => {
+			!this.isUnmounted && cancelAnimationFrame(this.af)
 
 			this.af = requestAnimationFrame(() => {
 				const bodyFontSize = parseInt(getComputedStyle(this.body).fontSize, 10)
@@ -26,23 +26,33 @@ export default class TextFitting extends HTMLElement {
 		}
 
 		this.af = null
-		this.resizeObserver = new ResizeObserver(this.update)
-		this.isDestroyed = true
+		this.resizeObserver = new ResizeObserver(this.resize)
+		this.isUnmounted = true
 	}
 
-	init() {
-		this.isDestroyed = false
-		this.update()
+	update() {
+		this.isUnmounted = false
+		this.resize()
 	}
 
-	destroy() {
-		this.isDestroyed = true
+	unmount() {
+		this.isUnmounted = true
 		this.resizeObserver.unobserve(this.wrap)
 		this.af = null
 		this.wrap.style.display = ''
 		this.wrap.style.justifyContent = ''
 		this.body.style.whiteSpace = ''
 		this.body.style.fontSize = ''
+	}
+
+	static init() {
+		const textFittings = document.querySelectorAll('text-fitting')
+		textFittings.forEach(textFitting => textFitting.update())
+	}
+
+	static destroy() {
+		const textFittings = document.querySelectorAll('text-fitting')
+		textFittings.forEach(textFitting => textFitting.unmount())
 	}
 }
 
