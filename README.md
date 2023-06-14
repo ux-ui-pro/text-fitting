@@ -9,19 +9,15 @@
 [![GitHub package version](https://img.shields.io/github/package-json/v/ux-ui-pro/text-fitting.svg)](https://github.com/ux-ui-pro/text-fitting)
 [![NPM Downloads](https://img.shields.io/npm/dm/text-fitting.svg?style=flat)](https://www.npmjs.org/package/text-fitting)
 
-<p><sup><a href="https://bundlephobia.com/package/text-fitting">600B gzipped</a></sup></p>
+<p><sup>600B gzipped</sup></p>
 <h3><a href="https://codepen.io/ux-ui/pen/GRYeOgL">Demo</a></h3>
 
 </div>
 <br>
 
 ### Installation
-```javascript
-$ yarn add text-fitting
 ```
-<sup>or</sup>
-```javascript
-$ npm i text-fitting
+$ yarn add text-fitting
 ```
 <br>
 
