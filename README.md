@@ -10,7 +10,7 @@
 [![NPM Downloads](https://img.shields.io/npm/dm/text-fitting.svg?style=flat)](https://www.npmjs.org/package/text-fitting)
 
 <p><sup>600B gzipped</sup></p>
-<h3><a href="https://codepen.io/ux-ui/pen/GRYeOgL">Demo</a></h3>
+<h3><a href="https://codepen.io/ux-ui/full/GRYeOgL">Demo</a></h3>
 
 </div>
 <br>
