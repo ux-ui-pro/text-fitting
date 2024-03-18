@@ -1,37 +1,40 @@
-<div align="center">
 <br>
+<div align="center">
 
-<h1>text-fitting</h1>
+# text-fitting
 
-<p><sup>Sets the font size to fill the target width</sup></p>
+Sets the font size to fill the target width
 
 [![npm](https://img.shields.io/npm/v/text-fitting.svg?colorB=brightgreen)](https://www.npmjs.com/package/text-fitting)
 [![GitHub package version](https://img.shields.io/github/package-json/v/ux-ui-pro/text-fitting.svg)](https://github.com/ux-ui-pro/text-fitting)
 [![NPM Downloads](https://img.shields.io/npm/dm/text-fitting.svg?style=flat)](https://www.npmjs.org/package/text-fitting)
 
-<p><sup>600B gzipped</sup></p>
-<h3><a href="https://codepen.io/ux-ui/full/GRYeOgL">Demo</a></h3>
+<sup>700B gzipped</sup>
+
+### <a href="https://codepen.io/ux-ui/full/GRYeOgL">Demo</a>
 
 </div>
+
 <br>
 
-### Installation
-```
+&#10148; **Installation**
+```console
 $ yarn add text-fitting
 ```
 <br>
 
-### Import
+&#10148; **Import**
 ```javascript
 import TextFitting from 'text-fitting'
 ```
 <br>
 
-### Usage
+&#10148; **Usage**
 ```HTML
 <text-fitting>Your text</text-fitting>
 ```
 <br>
 
-### License
+&#10148; **License**
+
 text-fitting is released under MIT license
